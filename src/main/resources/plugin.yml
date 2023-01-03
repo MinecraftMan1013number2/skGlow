@@ -1,0 +1,8 @@
+name: SkGlow
+version: '${project.version}'
+main: com.minecraftman.skglow.SkGlow
+api-version: 1.13
+depend: [ Skript, eGlow ]
+authors: [ MinecraftMan1013 ]
+description: A Skript addon that utilized eGlow's API to add glowing syntaxes
+website: https://github.com/MinecraftMan1013number2/skGlow
