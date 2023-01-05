@@ -24,18 +24,22 @@ import org.jetbrains.annotations.Nullable;
 public class ExprGlowColor extends SimpleExpression<EGlowColor> {
 	
 	// TODO:
-	//  Add support for "last glow color of %player%"
+	//  test
 	
 	static {
-		Skript.registerExpression(ExprGlowColor.class, EGlowColor.class, ExpressionType.PROPERTY, "[(current|last)] glow color of %player%");
+		Skript.registerExpression(ExprGlowColor.class, EGlowColor.class, ExpressionType.PROPERTY,
+			"[(current|1¦last)] glow color of %player%"
+		);
 	}
 	
 	private Expression<Player> glowingPlayer;
+	private int currentOrLast;
 	private final EGlowAPI api = EGlow.getAPI();
 	
 	@SuppressWarnings({"NullableProblems", "unchecked"})
 	@Override
 	public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
+		currentOrLast = parseResult.mark;
 		glowingPlayer = (Expression<Player>) exprs[0];
 		return true;
 	}
@@ -45,8 +49,12 @@ public class ExprGlowColor extends SimpleExpression<EGlowColor> {
 	protected @Nullable EGlowColor[] get(Event e) {
 		Player player = glowingPlayer.getSingle(e);
 		if (player != null) {
-			EGlowColor glowColor = EGlowColor.valueOf(api.getGlowColor(api.getEGlowPlayer(player)));
-			return new EGlowColor[] {glowColor};
+			if (currentOrLast == 0) {
+				return new EGlowColor[]{EGlowColor.valueOf(api.getGlowColor(api.getEGlowPlayer(player)))};
+			} else if (currentOrLast == 1) {
+				return new EGlowColor[]{EGlowColor.valueOf(api.getEGlowPlayer(player).getLastGlow())};
+			}
+			return null;
 		}
 		return null;
 	}
@@ -88,6 +96,6 @@ public class ExprGlowColor extends SimpleExpression<EGlowColor> {
 	@SuppressWarnings({"NullableProblems", "DataFlowIssue"})
 	@Override
 	public String toString(@Nullable Event e, boolean debug) {
-		return "Glow color of player: " + glowingPlayer.getSingle(e);
+		return ((currentOrLast == 0) ? "Current" : "Last") + " glow color of player " + glowingPlayer.getSingle(e);
 	}
 }
