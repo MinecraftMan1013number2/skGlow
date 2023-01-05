@@ -1,5 +1,6 @@
 package com.minecraftman.skglow.skript.types;
 
+import ch.njol.skript.Skript;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
@@ -24,11 +25,12 @@ public class TypeGlowColor {
 				public EGlowColor parse(String input, ParseContext context) {
 					input = input.replace(" glow", "");
 					try {
+//						return EGLOW_COLORS_ENUM.parse(input.toUpperCase());
 						return EGlowColor.valueOf(input.toUpperCase());
 					} catch (IllegalArgumentException e) {
+						Skript.error("Color '" + input + "' is invalid!");
 						return null;
 					}
-//					return EGLOW_COLORS_ENUM.parse(input);
 				}
 				
 				@SuppressWarnings("NullableProblems")
@@ -43,31 +45,6 @@ public class TypeGlowColor {
 					return toVariableNameString(color);
 				}
 			})
-			/*
-			.serializer(new Serializer<EGlowColor>() {
-				@Override
-				public Fields serialize(EGlowColor color) throws NotSerializableException {
-					Fields fields = new Fields();
-					fields.putObject("color", color);
-					return fields;
-				}
-				
-				@Override
-				public void deserialize(EGlowColor color, Fields fields) throws StreamCorruptedException, NotSerializableException {
-					fields.getAndRemoveObject("color", EGlowColor.class);
-				}
-				
-				@Override
-				public boolean mustSyncDeserialization() {
-					return false;
-				}
-				
-				@Override
-				protected boolean canBeInstantiated() {
-					return false;
-				}
-			})
-			 */
 		);
 	}
 }
