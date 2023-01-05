@@ -26,7 +26,7 @@ public class EffMakeGlow extends Effect {
 		// TODO:
 		//  possibly make
 		Skript.registerEffect(EffMakeGlow.class,
-			"make %players% glow %glowcolor%",
+			"make %players% %glowcolor%",
 			"apply %glowcolor% to %players%"
 		);
 	}
@@ -65,7 +65,7 @@ public class EffMakeGlow extends Effect {
 		}
 	}
 	
-	@SuppressWarnings("NullableProblems")
+	@SuppressWarnings({"NullableProblems", "DataFlowIssue"})
 	@Override
 	public String toString(@Nullable Event e, boolean debug) {
 		return "make " + players.toString(e, debug) + " glow " + ((color != null) ? color.getSingle(e) : "white");

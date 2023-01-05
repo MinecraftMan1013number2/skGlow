@@ -23,7 +23,7 @@ public class TypeGlowColor {
 				@SuppressWarnings("NullableProblems")
 				@Override
 				public EGlowColor parse(String input, ParseContext context) {
-					input = input.replace(" glow", "");
+					input = input.replace(" glow", "").replace("glow ", "");
 					try {
 //						return EGLOW_COLORS_ENUM.parse(input.toUpperCase());
 						return EGlowColor.valueOf(input.toUpperCase());
