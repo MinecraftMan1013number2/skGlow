@@ -26,8 +26,8 @@ public class EffMakeGlow extends Effect {
 		// TODO:
 		//  possibly make
 		Skript.registerEffect(EffMakeGlow.class,
-			"make %players% [glow] %glowcolor%",
-			"apply %glowcolor% to %players%"
+			"make %players% glow %glowcolor%",
+			"apply [glow color] %glowcolor% to %players%"
 		);
 	}
 	
@@ -39,12 +39,13 @@ public class EffMakeGlow extends Effect {
 	@SuppressWarnings({"unchecked", "NullableProblems"})
 	@Override
 	public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-		this.players = (Expression<Player>) exprs[0];
-		this.color = (Expression<EGlowColor>) exprs[1];
-		
 		if (matchedPattern == 0) {
-			Skript.error("This syntax is depricated! Please change your syntax to 'apply %glowcolor% to %players%'!");
+			Skript.error("This syntax is depricated! Please change your syntax to 'apply [glow color] %glowcolor% to %players%'!");
+			return false;
 		}
+		
+		this.color = (Expression<EGlowColor>) exprs[0];
+		this.players = (Expression<Player>) exprs[1];
 		
 		return true;
 	}
