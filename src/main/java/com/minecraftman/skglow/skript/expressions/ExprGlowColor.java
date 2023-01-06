@@ -96,6 +96,6 @@ public class ExprGlowColor extends SimpleExpression<EGlowColor> {
 	@SuppressWarnings({"NullableProblems", "DataFlowIssue"})
 	@Override
 	public String toString(@Nullable Event e, boolean debug) {
-		return ((currentOrLast == 0) ? "Current" : "Last") + " glow color of player " + glowingPlayer.getSingle(e);
+		return ((currentOrLast == 0) ? "Current" : "Last") + " glow color of player '" + glowingPlayer.getSingle(e) + "'";
 	}
 }
