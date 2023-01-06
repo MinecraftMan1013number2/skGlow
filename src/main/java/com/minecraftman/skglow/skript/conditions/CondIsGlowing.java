@@ -36,6 +36,7 @@ public class CondIsGlowing extends Condition {
 		return true;
 	}
 	
+	@SuppressWarnings("NullableProblems")
 	@Override
 	public boolean check(Event e) {
 		Player p = player.getSingle(e);
@@ -47,7 +48,7 @@ public class CondIsGlowing extends Condition {
 		return glowing;
 	}
 	
-	@SuppressWarnings("NullableProblems")
+	@SuppressWarnings({"NullableProblems", "DataFlowIssue"})
 	@Override
 	public String toString(@Nullable Event e, boolean debug) {
 		return player.getSingle(e) + " is glowing";
