@@ -52,11 +52,6 @@ public class EffMakeGlow extends Effect {
 	@SuppressWarnings("NullableProblems")
 	@Override
 	protected void execute(Event e) {
-		
-		System.out.println(color);
-		System.out.println(color.toString());
-		System.out.println(color.getSingle(e));
-		
 //		EGlowColor glowColor = ColorTypes.toEGlowColor(color.getSingle(e));
 		EGlowColor glowColor = color.getSingle(e);
 		if (glowColor == null) {
