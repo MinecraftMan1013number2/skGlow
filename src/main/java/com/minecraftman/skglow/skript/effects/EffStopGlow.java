@@ -20,7 +20,10 @@ import org.jetbrains.annotations.Nullable;
 public class EffStopGlow extends Effect {
 	
 	static {
-		Skript.registerEffect(EffStopGlow.class, "make %players% stop glowing");
+		Skript.registerEffect(EffStopGlow.class,
+			"make %players% stop glowing",
+				"disable glowing for %players%"
+		);
 	}
 	
 	private final EGlowAPI api = EGlow.getAPI();

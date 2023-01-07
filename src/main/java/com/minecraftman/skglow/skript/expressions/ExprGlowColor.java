@@ -24,10 +24,6 @@ import org.jetbrains.annotations.Nullable;
 @Since("1.0.0")
 @RequiredPlugins("eGlow")
 public class ExprGlowColor extends SimpleExpression<EGlowColor> {
-	
-	// TODO:
-	//  test
-	
 	static {
 		Skript.registerExpression(ExprGlowColor.class, EGlowColor.class, ExpressionType.PROPERTY,
 			"[current] glow color of %player%"
