@@ -12,6 +12,7 @@ import ch.njol.util.coll.CollectionUtils;
 import me.MrGraycat.eGlow.API.EGlowAPI;
 import me.MrGraycat.eGlow.API.Enum.EGlowColor;
 import me.MrGraycat.eGlow.EGlow;
+import me.MrGraycat.eGlow.Manager.Interface.IEGlowPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
@@ -47,15 +48,29 @@ public class ExprGlowColor extends SimpleExpression<EGlowColor> {
 	@SuppressWarnings("NullableProblems")
 	@Override
 	protected @Nullable EGlowColor[] get(Event e) {
+		System.out.println("1");
 		Player player = glowingPlayer.getSingle(e);
+		System.out.println("2");
 		if (player != null) {
+			System.out.println("3");
 			if (currentOrLast == 0) {
-				return new EGlowColor[]{EGlowColor.valueOf(api.getGlowColor(api.getEGlowPlayer(player)))};
+				System.out.println("4");
+				IEGlowPlayer ieGlowPlayer = api.getEGlowPlayer(player);
+				System.out.println("5 - " + ieGlowPlayer);
+				String glowColor = api.getGlowColor(ieGlowPlayer);
+				System.out.println("6 - " + glowColor);
+				EGlowColor value = EGlowColor.valueOf(glowColor);
+				System.out.println("7 - " + value);
+				return new EGlowColor[]{value};
+//				return new EGlowColor[]{EGlowColor.valueOf(api.getGlowColor(api.getEGlowPlayer(player)))};
 			} else if (currentOrLast == 1) {
+				System.out.println("8");
 				return new EGlowColor[]{EGlowColor.valueOf(api.getEGlowPlayer(player).getLastGlow())};
 			}
+			System.out.println("9");
 			return null;
 		}
+		System.out.println("10");
 		return null;
 	}
 	
