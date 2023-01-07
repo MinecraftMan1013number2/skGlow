@@ -23,8 +23,6 @@ import org.jetbrains.annotations.Nullable;
 public class EffMakeGlow extends Effect {
 	
 	static {
-		// TODO:
-		//  possibly make
 		Skript.registerEffect(EffMakeGlow.class,
 			"make %players% glow %glowcolor%",
 			"apply [glow color] %glowcolor% to %players%"
@@ -33,7 +31,6 @@ public class EffMakeGlow extends Effect {
 	
 	private Expression<Player> players;
 	private Expression<EGlowColor> color;
-//	private Expression<SkriptColor> color;
 	private final EGlowAPI api = EGlow.getAPI();
 	
 	@SuppressWarnings({"unchecked", "NullableProblems"})
@@ -53,7 +50,6 @@ public class EffMakeGlow extends Effect {
 	@SuppressWarnings("NullableProblems")
 	@Override
 	protected void execute(Event e) {
-//		EGlowColor glowColor = ColorTypes.toEGlowColor(color.getSingle(e));
 		EGlowColor glowColor = color.getSingle(e);
 		if (glowColor == null) {
 			SkGlow.getPluginLogger().info("Color '" + color.getSingle(e) + "' is invalid!");
@@ -71,6 +67,4 @@ public class EffMakeGlow extends Effect {
 	public String toString(@Nullable Event e, boolean debug) {
 		return "make " + players.toString(e, debug) + " glow " + ((color != null) ? color.getSingle(e) : "white");
 	}
-	
-	
 }
