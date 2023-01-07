@@ -13,6 +13,7 @@ import me.MrGraycat.eGlow.API.EGlowAPI;
 import me.MrGraycat.eGlow.API.Enum.EGlowColor;
 import me.MrGraycat.eGlow.EGlow;
 import me.MrGraycat.eGlow.Manager.Interface.IEGlowPlayer;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
@@ -29,18 +30,16 @@ public class ExprGlowColor extends SimpleExpression<EGlowColor> {
 	
 	static {
 		Skript.registerExpression(ExprGlowColor.class, EGlowColor.class, ExpressionType.PROPERTY,
-			"[(current|1¦last)] glow color of %player%"
+			"[current] glow color of %player%"
 		);
 	}
 	
 	private Expression<Player> glowingPlayer;
-	private int currentOrLast;
 	private final EGlowAPI api = EGlow.getAPI();
 	
 	@SuppressWarnings({"NullableProblems", "unchecked"})
 	@Override
 	public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-		currentOrLast = parseResult.mark;
 		glowingPlayer = (Expression<Player>) exprs[0];
 		return true;
 	}
@@ -48,30 +47,14 @@ public class ExprGlowColor extends SimpleExpression<EGlowColor> {
 	@SuppressWarnings("NullableProblems")
 	@Override
 	protected @Nullable EGlowColor[] get(Event e) {
-		System.out.println("1");
 		Player player = glowingPlayer.getSingle(e);
-		System.out.println("2");
-		if (player != null) {
-			System.out.println("3");
-			if (currentOrLast == 0) {
-				System.out.println("4");
-				IEGlowPlayer ieGlowPlayer = api.getEGlowPlayer(player);
-				System.out.println("5 - " + ieGlowPlayer);
-				String glowColor = api.getGlowColor(ieGlowPlayer);
-				System.out.println("6 - " + glowColor);
-				EGlowColor value = EGlowColor.valueOf(glowColor);
-				System.out.println("7 - " + value);
-				return new EGlowColor[]{value};
-//				return new EGlowColor[]{EGlowColor.valueOf(api.getGlowColor(api.getEGlowPlayer(player)))};
-			} else if (currentOrLast == 1) {
-				System.out.println("8");
-				return new EGlowColor[]{EGlowColor.valueOf(api.getEGlowPlayer(player).getLastGlow())};
-			}
-			System.out.println("9");
-			return null;
-		}
-		System.out.println("10");
-		return null;
+		if (player == null || !player.isOnline()) return null;
+		IEGlowPlayer ieGlowPlayer = api.getEGlowPlayer(player);
+		ChatColor chatColorGlow = ieGlowPlayer.getActiveColor();
+		if (chatColorGlow == null) return new EGlowColor[]{EGlowColor.NONE};
+		String glowColor = chatColorGlow.name().split("_")[1];
+		
+		return new EGlowColor[]{EGlowColor.valueOf(glowColor)};
 	}
 	
 	@Override
@@ -111,6 +94,6 @@ public class ExprGlowColor extends SimpleExpression<EGlowColor> {
 	@SuppressWarnings({"NullableProblems", "DataFlowIssue"})
 	@Override
 	public String toString(@Nullable Event e, boolean debug) {
-		return ((currentOrLast == 0) ? "Current" : "Last") + " glow color of player '" + glowingPlayer.getSingle(e) + "'";
+		return "Current glow color of player '" + glowingPlayer.getSingle(e) + "'";
 	}
 }
