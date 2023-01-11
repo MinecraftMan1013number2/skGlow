@@ -1,6 +1,5 @@
 package com.minecraftman.skglow.skript.types;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
@@ -28,7 +27,7 @@ public class TypeGlowColor {
 //						return EGLOW_COLORS_ENUM.parse(input.toUpperCase());
 						return EGlowColor.valueOf(input.toUpperCase());
 					} catch (IllegalArgumentException e) {
-						Skript.error("Color '" + input + "' is invalid!");
+//						Skript.error("Color '" + input + "' is invalid!");
 						return null;
 					}
 				}
@@ -60,7 +59,7 @@ public class TypeGlowColor {
 				public BlinkSpeed parse(String input, ParseContext context) {
 					input = input.toUpperCase();
 					if (!input.equals("FAST") && !input.equals("SLOW")) {
-						Skript.error("Invalid speed (" + input + ")! (Expected 'fast' or 'slow')");
+//						Skript.error("Invalid speed (" + input + ")! (Expected 'fast' or 'slow')");
 						return null;
 					} else {
 						return BlinkSpeed.valueOf(input);
