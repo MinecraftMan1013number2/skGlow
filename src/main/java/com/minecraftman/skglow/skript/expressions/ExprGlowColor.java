@@ -87,9 +87,9 @@ public class ExprGlowColor extends SimpleExpression<EGlowColor> {
 		}
 	}
 	
-	@SuppressWarnings({"NullableProblems", "DataFlowIssue"})
+	@SuppressWarnings("NullableProblems")
 	@Override
 	public String toString(@Nullable Event e, boolean debug) {
-		return "Current glow color of player '" + glowingPlayer.getSingle(e) + "'";
+		return "Current glow color of player '" + glowingPlayer.toString(e, debug) + "'";
 	}
 }
