@@ -27,7 +27,7 @@ public class ExprGlowColor extends SimpleExpression<EGlowColor> {
 	static {
 		Skript.registerExpression(ExprGlowColor.class, EGlowColor.class, ExpressionType.PROPERTY,
 			"[current] glow color of %player%",
-				"%player%['s] [current] glow color"
+			"%player%['s] [current] glow color"
 		);
 	}
 	
@@ -40,7 +40,9 @@ public class ExprGlowColor extends SimpleExpression<EGlowColor> {
 		glowingPlayer = (Expression<Player>) exprs[0];
 		return true;
 	}
-	
+	//TODO:
+	// Test with colors containing and underscore (ex DARK_GREEN)
+
 	@SuppressWarnings("NullableProblems")
 	@Override
 	protected @Nullable EGlowColor[] get(Event e) {
@@ -49,7 +51,11 @@ public class ExprGlowColor extends SimpleExpression<EGlowColor> {
 		IEGlowPlayer ieGlowPlayer = api.getEGlowPlayer(player);
 		ChatColor chatColorGlow = ieGlowPlayer.getActiveColor();
 		if (chatColorGlow == null) return new EGlowColor[]{EGlowColor.NONE};
-		String glowColor = chatColorGlow.name().split("_")[1];
+		int index = chatColorGlow.name().indexOf("_");
+		String glowColor = chatColorGlow.name();
+		if (index >= 0) {
+			glowColor = glowColor.substring(index);
+		}
 		
 		return new EGlowColor[]{EGlowColor.valueOf(glowColor)};
 	}
