@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 @Name("Is Glowing")
 @Description("See if a player is glowing")
 @Examples({"if player is glowing:", "if player is not glowing:"})
-@Since("2.0.1")
+@Since("2.0.0")
 @RequiredPlugins("eGlow")
 public class CondIsGlowing extends Condition {
 	private Expression<Player> player;
