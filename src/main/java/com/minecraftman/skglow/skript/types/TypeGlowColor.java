@@ -23,11 +23,11 @@ public class TypeGlowColor {
 				@Override
 				public EGlowColor parse(String input, ParseContext context) {
 					input = input.replace(" glow", "").replace("glow ", "");
+					input = input.replace(" ", "_");
 					try {
 //						return EGLOW_COLORS_ENUM.parse(input.toUpperCase());
 						return EGlowColor.valueOf(input.toUpperCase());
 					} catch (IllegalArgumentException e) {
-//						Skript.error("Color '" + input + "' is invalid!");
 						return null;
 					}
 				}
@@ -59,7 +59,6 @@ public class TypeGlowColor {
 				public EffectSpeed parse(String input, ParseContext context) {
 					input = input.toUpperCase();
 					if (!input.equals("FAST") && !input.equals("SLOW")) {
-//						Skript.error("Invalid speed (" + input + ")! (Expected 'fast' or 'slow')");
 						return null;
 					} else {
 						return EffectSpeed.valueOf(input);

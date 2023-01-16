@@ -17,8 +17,8 @@ import org.jetbrains.annotations.Nullable;
 public class EffBlink extends Effect {
 	static {
 		Skript.registerEffect(EffBlink.class,
-				"make %players% blink %glowcolor% %blinkspeed%[ly]",
-				"apply %blinkspeed% %glowcolor% blink to %players%"
+				"make %players% blink %glowcolor% %effectspeed%[ly]",
+				"apply %effectspeed% %glowcolor% blink to %players%"
 		);
 	}
 	
@@ -45,9 +45,9 @@ public class EffBlink extends Effect {
 	@SuppressWarnings({"NullableProblems", "DataFlowIssue"})
 	@Override
 	protected void execute(Event e) {
-		String blinkSpeed = speed.getSingle(e).name().toUpperCase();
+		String effectSpeed = speed.getSingle(e).name().toUpperCase();
 		String blinkColor = glowColor.getSingle(e).name().toUpperCase();
-		EGlowBlink value = EGlowBlink.valueOf(blinkColor + "_" + blinkSpeed);
+		EGlowBlink value = EGlowBlink.valueOf(blinkColor + "_" + effectSpeed);
 		for (Player player : players.getArray(e)) {
 			api.enableGlow(api.getEGlowPlayer(player), value);
 		}
