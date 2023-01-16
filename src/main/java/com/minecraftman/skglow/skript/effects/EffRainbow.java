@@ -1,6 +1,7 @@
 package com.minecraftman.skglow.skript.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.*;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -13,6 +14,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
+@Name("Rainbow Glow")
+@Description("Make a player glow in a rainbow")
+@Examples({"make all players glow rainbow slowly", "make player glow rainbow fast"})
+@Since("2.0.0")
+@RequiredPlugins("eGlow")
 public class EffRainbow extends Effect {
 	static {
 		Skript.registerEffect(EffRainbow.class,
