@@ -1,6 +1,6 @@
 package com.minecraftman.skglow.skript.types;
 
-public enum BlinkSpeed {
+public enum EffectSpeed {
 	FAST,
 	SLOW
 }

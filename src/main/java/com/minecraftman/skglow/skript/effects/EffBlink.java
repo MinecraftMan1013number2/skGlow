@@ -5,7 +5,7 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import com.minecraftman.skglow.skript.types.BlinkSpeed;
+import com.minecraftman.skglow.skript.types.EffectSpeed;
 import me.MrGraycat.eGlow.API.EGlowAPI;
 import me.MrGraycat.eGlow.API.Enum.EGlowBlink;
 import me.MrGraycat.eGlow.API.Enum.EGlowColor;
@@ -14,13 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-
 public class EffBlink extends Effect {
-	
-	// TODO:
-	//  finish class
-	
 	static {
 		Skript.registerEffect(EffBlink.class,
 				"make %players% blink %glowcolor% %blinkspeed%[ly]",
@@ -29,7 +23,7 @@ public class EffBlink extends Effect {
 	}
 	
 	Expression<Player> players;
-	Expression<BlinkSpeed> speed;
+	Expression<EffectSpeed> speed;
 	Expression<EGlowColor> glowColor;
 	
 	private final EGlowAPI api = EGlow.getAPI();
@@ -37,13 +31,11 @@ public class EffBlink extends Effect {
 	@SuppressWarnings({"NullableProblems", "unchecked"})
 	@Override
 	public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-		// players{0}, glowColor{1}, speed{2}
-		// speed{0}, glowColor{1}, players{2};
 		if (matchedPattern == 0) {
 			players = (Expression<Player>) exprs[0];
-			speed = (Expression<BlinkSpeed>) exprs[2];
+			speed = (Expression<EffectSpeed>) exprs[2];
 		} else {
-			speed = (Expression<BlinkSpeed>) exprs[0];
+			speed = (Expression<EffectSpeed>) exprs[0];
 			players = (Expression<Player>) exprs[2];
 		}
 		glowColor = (Expression<EGlowColor>) exprs[1];
@@ -61,10 +53,10 @@ public class EffBlink extends Effect {
 		}
 	}
 	
-	@SuppressWarnings({"NullableProblems", "DataFlowIssue"})
+	@SuppressWarnings("NullableProblems")
 	@Override
 	public String toString(@Nullable Event e, boolean debug) {
-		String s = speed.getSingle(e).name().toLowerCase();
-		return "make " + Arrays.toString(players.getArray(e)) + " blink " + glowColor.getSingle(e) + " " + s + (s.equals("slow") ? "ly" : "");
+		String s = speed.toString(e, debug);
+		return "make " + players.toString(e, debug) + " blink " + glowColor.toString(e, debug) + " " + s + (s.equals("slow") ? "ly" : "");
 	}
 }

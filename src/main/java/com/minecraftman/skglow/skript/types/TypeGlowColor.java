@@ -46,35 +46,35 @@ public class TypeGlowColor {
 			})
 		);
 		
-		Classes.registerClass(new ClassInfo<>(BlinkSpeed.class, "blinkspeed")
-			.user("blink ?speeds?")
-			.name("Blink Speed")
-			.description("Represents a blink speed (fast or slow)")
+		Classes.registerClass(new ClassInfo<>(EffectSpeed.class, "effectspeed")
+			.user("effect ?speeds?")
+			.name("Effect Speed")
+			.description("Represents an effect speed (fast or slow)")
 			.usage("fast", "slow")
 			.examples("")
 			.since("2.0.0")
-			.parser(new Parser<BlinkSpeed>() {
+			.parser(new Parser<EffectSpeed>() {
 				@SuppressWarnings("NullableProblems")
 				@Override
-				public BlinkSpeed parse(String input, ParseContext context) {
+				public EffectSpeed parse(String input, ParseContext context) {
 					input = input.toUpperCase();
 					if (!input.equals("FAST") && !input.equals("SLOW")) {
 //						Skript.error("Invalid speed (" + input + ")! (Expected 'fast' or 'slow')");
 						return null;
 					} else {
-						return BlinkSpeed.valueOf(input);
+						return EffectSpeed.valueOf(input);
 					}
 				}
 				
 				@SuppressWarnings("NullableProblems")
 				@Override
-				public String toVariableNameString(BlinkSpeed speed) {
+				public String toVariableNameString(EffectSpeed speed) {
 					return speed.name().toLowerCase();
 				}
 				
 				@SuppressWarnings("NullableProblems")
 				@Override
-				public String toString(BlinkSpeed speed, int flags) {
+				public String toString(EffectSpeed speed, int flags) {
 					return toVariableNameString(speed);
 				}
 			})
