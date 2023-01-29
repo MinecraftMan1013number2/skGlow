@@ -1,9 +1,9 @@
 
 # SkGlow
-A Skript addon that utilized eGlow's API to add glowing syntaxes
+A Skript addon that utilized eGlow's API to add glowing syntaxes.\
+Requires [eGlow](https://www.spigotmc.org/resources/eglow-1-9-4-1-19-3-glow-cosmetic-respects-eula-mysql.63295) to work.
 
-
-
+---
 
 All syntaxes are available on the SkriptHub docs.
 
