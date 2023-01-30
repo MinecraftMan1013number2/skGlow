@@ -23,8 +23,8 @@ import org.jetbrains.annotations.Nullable;
 public class EffBlink extends Effect {
 	static {
 		Skript.registerEffect(EffBlink.class,
-				"make %players% blink %glowcolor% %effectspeed%[ly]",
-				"apply %effectspeed% %glowcolor% blink to %players%"
+				"make %players% blink %glowcolor% with speed %effectspeed%",
+				"apply %glowcolor% blink with speed %effectspeed% to %players%"
 		);
 	}
 	
