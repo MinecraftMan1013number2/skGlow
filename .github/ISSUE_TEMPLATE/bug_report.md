@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report if something isn't working as it should
+about: Create a report if something isn't working as it should. **THIS IS NOT FOR SUPPORT!**
 title: ''
 labels: bug
 assignees: ''
